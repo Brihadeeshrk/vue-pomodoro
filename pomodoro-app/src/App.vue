@@ -1,8 +1,14 @@
 <template>
   <v-app>
-    <v-main>
-      <Pomodoro/>
-    </v-main>
+    <v-content>
+      <v-container>
+        <v-row>
+          <v-col sm="6" offset-sm="4">
+            <Pomodoro/>   
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
   </v-app>
 </template>
 
