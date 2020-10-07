@@ -15,11 +15,28 @@
             </div>
 
         </v-card>
+        <SettingsDialog :dialog="dialog" :closeDialog="closeDialog" :save="save" />
+        
     </v-card>
 </template>
 
 <script>
+import SettingsDialog from './SettingsDialog.vue'
+
 export default {
+    components: {
+        SettingsDialog
+    },
+    props: {
+        dialog: {
+            type: Boolean,
+            require: true
+        },
+        closeDialog: {
+            type: Function,
+            require: true
+        },
+    },
     data() {
         return {
             timerInstance: null,
@@ -39,7 +56,7 @@ export default {
                 }
             ],
             totalSeconds: 25 * 60,
-            isRunning: false
+            isRunning: false,
         }
     },
     computed: {
@@ -65,6 +82,10 @@ export default {
             this.stop(),
             this.isRunning = true
             this.timerInstance = setInterval(() => {
+                if(this.totalSeconds <= 0) {
+                    this.stop()
+                    return
+                }
                 this.totalSeconds -= 1
             }, 1000)
         },
@@ -80,6 +101,9 @@ export default {
             console.log(num)
             this.CurrentTimer = num
             this.reset(this.timers[num].minutes)
+        },
+        save() {
+            this.closeDialog()
         }
     }
 }
