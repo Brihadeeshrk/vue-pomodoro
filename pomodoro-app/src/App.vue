@@ -13,8 +13,7 @@
                 right
                 fab
                 small
-                @click="dialog = true"
-        >
+                @click="dialog = true" >
                 <v-icon>mdi-cog-outline</v-icon>
               </v-btn>
         </v-row>
