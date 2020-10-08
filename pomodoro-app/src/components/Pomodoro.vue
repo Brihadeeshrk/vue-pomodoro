@@ -15,7 +15,7 @@
             </div>
 
         </v-card>
-        <SettingsDialog :dialog="dialog" :closeDialog="closeDialog" :save="save" />
+        <SettingsDialog :dialog="dialog" :closeDialog="closeDialog" :save="save" :timers="timers" />
         
     </v-card>
 </template>
@@ -102,7 +102,10 @@ export default {
             this.CurrentTimer = num
             this.reset(this.timers[num].minutes)
         },
-        save() {
+        save(updatedTimers) {
+            this.timers = this.timers.map((timer, i) => {
+                return { ...timer, minutes: parseInt(updatedTimers[i])}
+            }),
             this.closeDialog()
         }
     }
